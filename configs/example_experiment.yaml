@@ -1,0 +1,59 @@
+experiment:
+  name: "local_secure_comm_latency_demo"
+  repetitions: 3
+  output_dir: "data/raw"
+  random_seed: 42
+
+targets:
+  http_url: "http://127.0.0.1:8000/health"
+  iperf_host: "127.0.0.1"
+  iperf_port: 5201
+
+paths:
+  direct:
+    enabled: true
+
+  wireguard:
+    enabled: false
+    interface: "wg0"
+    notes: "Enable only when a local WireGuard lab is configured."
+
+  tor:
+    enabled: false
+    socks_proxy: "socks5h://127.0.0.1:9050"
+    control_port: 9051
+    collect_circuit_metadata: false
+
+measurements:
+  ping:
+    enabled: true
+    count: 5
+
+  http_timing:
+    enabled: true
+    timeout_seconds: 10
+
+  iperf3:
+    enabled: false
+    duration_seconds: 5
+    protocol: "tcp"
+
+network_conditions:
+  enabled: false
+  interface: "eth0"
+  profiles:
+    - name: "baseline"
+      delay_ms: 0
+      jitter_ms: 0
+      loss_percent: 0
+      bandwidth_mbit: null
+    - name: "mobile_like"
+      delay_ms: 40
+      jitter_ms: 10
+      loss_percent: 0.5
+      bandwidth_mbit: 20
+    - name: "satellite_like"
+      delay_ms: 600
+      jitter_ms: 40
+      loss_percent: 1.0
+      bandwidth_mbit: 10

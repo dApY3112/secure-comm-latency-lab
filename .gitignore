@@ -1,0 +1,26 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+dist/
+build/
+
+# Local experiment outputs can be large or environment-specific.
+data/raw/*.jsonl
+!data/raw/synthetic_example.jsonl
+!data/raw/.gitkeep
+data/processed/*.csv
+!data/processed/.gitkeep
+reports/figures/*.png
+!reports/figures/.gitkeep
+
+# OS/editor noise.
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
